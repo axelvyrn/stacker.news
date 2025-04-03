@@ -21,9 +21,9 @@ export async function testCreateInvoice ({ nwcUrlRecv }, { signal }) {
 }
 
 export async function createInvoice ({ msats, description, expiry }, { nwcUrlRecv }, { signal }) {
-  const result = await nwcTryRun(
+  const { result: { invoice } } = await nwcTryRun(
     nwc => nwc.req('make_invoice', { amount: msats, description, expiry }),
     { nwcUrl: nwcUrlRecv }, { signal }
   )
-  return result.invoice
+  return invoice
 }
