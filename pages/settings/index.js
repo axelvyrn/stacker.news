@@ -861,10 +861,25 @@ function AuthMethods ({ methods, apiKeyEnabled }) {
             : <div key={provider} className='mt-2'><EmailLinkForm callbackUrl='/settings' /></div>
         } else if (provider === 'lightning') {
           return (
+            <div key={provider} className="d-flex align-items-center mt-2">
             <QRLinkButton
               key={provider} provider={provider}
               status={methods[provider]} unlink={async () => await unlink(provider)}
             />
+            <Info className="ms-2">
+            <ul>
+              <li>
+                This is an <a href="https://github.com/lnurl/luds/blob/legacy/lnurl-auth.md">LNURL-auth</a>
+              </li>
+              <li>
+                Make sure your wallet support LNRUL authentication for a seamless experience.
+              </li>
+              <li>
+                Examples of wallets that support LNRUL auth: Breeze, Phoenix, or any of the wallets listed <a href="https://github.com/lnurl/luds/blob/luds/README.md#lnurl-documents">here</a>
+              </li>
+            </ul>
+          </Info>
+            </div>
           )
         } else if (provider === 'nostr') {
           return <NostrLinkButton key='nostr' status={methods[provider]} unlink={async () => await unlink(provider)} />
